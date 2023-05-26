@@ -1,8 +1,9 @@
 <?php
-    require_once __DIR__ .'/../src/bootstrap.php'; 
+    require_once __DIR__ . '/../src/bootstrap.php'; 
+    require_once __DIR__ . '/../src/register.php';
     view('header', ['title' => 'Register']);
 ?>
-        <form action="register.php" method="post">
+        <form action="/" method="post">
             <h1>Sign Up</h1>
             <div>
                 <label for="username">Username:</label>
