@@ -41,3 +41,21 @@ function redirect_with_message(string $url, string $message, string $type=FLASH_
     redirect_to($url);
 
 }
+function error_class(array $errors, string $field): string
+{
+    return isset($errors[$field]) ? 'error' : '';
+}
+
+function session_flash(...$keys): array
+{
+    $data = [];
+    foreach ($keys as $key) {
+        if (isset($_SESSION[$key])) {
+            $data[] = $_SESSION[$key];
+            unset($_SESSION[$key]);
+        } else {
+            $data[] = [];
+        }
+    }
+    return $data;
+}
