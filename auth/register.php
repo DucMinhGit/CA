@@ -3,7 +3,8 @@
     require_once __DIR__ . '/../src/register.php';
     view('header', ['title' => 'Register']);
 ?>
-        <form action="/" method="post">
+<?php flash() ?>
+        <form action="" method="post">
             <h1>Sign Up</h1>
             <div>
                 <label for="username">Username:</label>
