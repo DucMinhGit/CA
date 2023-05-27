@@ -19,3 +19,17 @@ function is_get_request():bool
 {
     return strtoupper($_SERVER['REQUEST_METHOD'] === 'GET');
 }
+
+function session_flash(...$keys): array
+{
+    $data = [];
+    foreach ($keys as $key) {
+        if (isset($_SESSION[$key])) {
+            $data[] = $_SESSION[$key];
+            unset($_SESSION[$key]);
+        } else {
+            $data[] = [];
+        }
+    }
+    return $data;
+}
