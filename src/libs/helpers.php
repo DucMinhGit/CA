@@ -19,3 +19,8 @@ function is_get_request():bool
 {
     return strtoupper($_SERVER['REQUEST_METHOD'] === 'GET');
 }
+
+function error_class(array $errors, string $field): string
+{
+    return isset($errors[$field]) ? 'error' : '';
+}
