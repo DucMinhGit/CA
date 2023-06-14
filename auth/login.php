@@ -4,6 +4,7 @@ require_once __DIR__ . '/../src/bootstrap.php';
 require_once __DIR__ . '/../src/login.php';
 
 view('header', ['title' => 'Login']);
+flash();
 ?>
 
 <?php if (isset($errors['login'])) : ?>

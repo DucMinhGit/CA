@@ -1,5 +1,9 @@
 <?php
 
+if (is_user_logged()) {
+    redirect_to('index.php');
+}
+
 $inputs = [];
 $errors = [];
 
