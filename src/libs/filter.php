@@ -19,7 +19,7 @@ function filter(array $data, array $fields, array $messages = []): array
     }
 
     $inputs = sanitize($data, $sanitization_rule);
-    $errors = validate($inputs, $validation_rule);
+    $errors = validate($inputs, $validation_rule, $messages);
 
     return [$inputs, $errors];
 }

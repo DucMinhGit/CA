@@ -3,7 +3,7 @@
 $inputs = [];
 $errors = [];
 
-if(is_post_request()){
+if (is_post_request()) {
     $fields = [
         'username' => 'string | required | alphanumeric | between: 3, 25 | unique: users, username', //
         'email' => 'email | required | email | unique: users, email',
@@ -25,12 +25,16 @@ if(is_post_request()){
 
     [$inputs, $errors] = filter($_POST, $fields, $messages);
 
-    if($errors){
+    if ($errors) {
         redirect_with('index.php', ['inputs' => $inputs, 'errors' => $errors]);
     }
 
-
-} 
-else if(is_get_request()){
+    if (register_user($inputs['username'], $inputs['email'], $inputs['password'])) {
+        redirect_with_message(
+            'login.php',
+            'Your account has been created successfully. Please login here.'
+        );
+    }
+} else if (is_get_request()) {
     [$inputs, $errors] = session_flash('inputs', 'errors');
 }
