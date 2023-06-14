@@ -26,7 +26,7 @@ if (is_post_request()) {
     [$inputs, $errors] = filter($_POST, $fields, $messages);
 
     if ($errors) {
-        redirect_with('index.php', ['inputs' => $inputs, 'errors' => $errors]);
+        redirect_with('register.php', ['inputs' => $inputs, 'errors' => $errors]);
     }
 
     if (register_user($inputs['username'], $inputs['email'], $inputs['password'])) {
