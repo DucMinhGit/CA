@@ -50,7 +50,7 @@ function validate(array $data, array $fields, array $messages = []): array
 
                 if(!$pass)
                 {
-                    $errors[$field] = sprintf($messages[$field][$rule_name] ?? $validation_errors[$rule_name], $field, ...$param_str);
+                    $errors[$field] = sprintf($messages[$field][$rule_name] ?? $validation_errors[$rule_name], $field, ...$params);
                 }
             }
         }
