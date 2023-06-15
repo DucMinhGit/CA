@@ -33,10 +33,15 @@ if (is_post_request()) {
         redirect_with('register.php', ['inputs' => $inputs, 'errors' => $errors]);
     }
 
-    if (register_user($inputs['username'], $inputs['email'], $inputs['password'])) {
+    $activation_code = generate_activation_code();
+
+    if (register_user($inputs['username'], $inputs['email'], $inputs['password'], $activation_code)) {
+        // send the activation email
+        send_activation_email($inputs['email'], $activation_code);
+
         redirect_with_message(
             'login.php',
-            'Your account has been created successfully. Please login here.'
+            'Please check your email to activate your account before signing in'
         );
     }
 } else if (is_get_request()) {
