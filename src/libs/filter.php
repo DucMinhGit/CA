@@ -15,6 +15,8 @@ function filter(array $data, array $fields, array $messages = []): array
     foreach ($fields as $field => $rules) {
         if (strpos($rules, '|')) {
             [$sanitization_rule[$field], $validation_rule[$field]] = explode('|', $rules, 2);
+        } else {
+            $sanitization_rule[$field] = $rules;
         }
     }
 

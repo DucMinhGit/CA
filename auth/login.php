@@ -25,6 +25,13 @@ flash();
         <input type="password" name="password" id="password">
         <small><?= $errors['password'] ?? '' ?></small>
     </div>
+    <div>
+        <label for="remember_me">
+            <input type="checkbox" name="remember_me" id="remember_me" value="checked" <?= $inputs['remember_me'] ?? '' ?> />
+            Remember Me
+        </label>
+        <small><?= $errors['agree'] ?? '' ?></small>
+    </div>
     <section>
         <button type="submit">Login</button>
         <a href="register.php">Register</a>
