@@ -7,14 +7,15 @@
  * @param array $messages
  * @return array
  */
-function filter(array $data, array $fields, array $messages = []): array
+function filter(array $data, array $fields, array $messages = []): array 
 {
     $validation_rule = [];
     $sanitization_rule = [];
 
-    foreach ($fields as $field => $rules) {
-        if (strpos($rules, '|')) {
-            [$sanitization_rule[$field], $validation_rule[$field]] = explode('|', $rules, 2);
+    foreach ($fields as $field => $rules) 
+    {
+        if (strpos($rules, '|')) { 
+            [$sanitization_rule[$field], $validation_rule[$field]] = array_map('trim', explode('|', $rules, 2));
         } else {
             $sanitization_rule[$field] = $rules;
         }
