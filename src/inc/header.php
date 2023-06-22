@@ -19,10 +19,10 @@
                 </a>
             </div>
             <nav class="site-navigation">
-
-                <div class="dropdown">
+                <?php if(is_user_logged_in()) : ?>
+                    <div class="dropdown">
                     <div>
-                        <span class="text-white fz-18">Welcome <?php echo ucfirst('username') ?> !</span>
+                        <span class="text-white fz-18">Welcome <?php echo ucfirst(current_user()) ?> !</span>
                         <i id="dropbtn" class=" dropbtn fa-sharp fa-solid fa-caret-down"></i>
                     </div>
                     <div class="dropdown-content" id="myDropdown">
@@ -56,6 +56,7 @@
                     <label for="nav-mobile-input">
                         <i class="nav__mobile-close fa-solid fa-xmark"></i>
                     </label>
+                    <div class="nav__mobile-name">Welcome <?php echo ucfirst(current_user()) ?> !</div>
                     <ul class="nav__mobile-list">
                         <li>
                             <a href="#" class="nav__mobile-link">
@@ -71,6 +72,7 @@
                         </li>
                     </ul>
                 </nav>
+                <?php endif ?>
             </nav>
         </div>
     </header>
