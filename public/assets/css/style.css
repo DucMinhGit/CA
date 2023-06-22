@@ -202,23 +202,45 @@ body > header {
   }
 }
 
-body > footer {
-  background-color: var(--footer-bg-color);
-  border-top: 1px solid var(--border-color);
-  width: 100%;
-  margin-top: auto;
+footer {
+  padding: 10px;
+  max-width: 100%;
 }
-body > footer > p {
+
+.footer_wrap {
+ 
+}
+
+.widget-title {
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0 0 1rem;
+  margin: 0;
+}
+
+.site-footer-sidebar {
+  flex: 1;
+}
+
+.site-footer-widgets {
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+}
+
+.site-info {
   text-align: center;
-  max-width: var(--max-width);
-  padding: 1rem 0;
-  margin: 0 auto;
+  margin: auto;
 }
+
 body > main {
   max-width: var(--max-width);
   margin: 1rem auto;
   flex: 1;
 }
+
 main > form {
   margin: 1rem auto;
   border: solid 1px var(--border-color);
