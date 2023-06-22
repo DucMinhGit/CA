@@ -214,13 +214,9 @@ footer {
   max-width: 100%;
 }
 
-.footer_wrap {
- 
-}
-
 .widget-title {
   font-weight: 700;
-  font-size: .8rem;
+  font-size: 0.8rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 0 0 1rem;
@@ -242,145 +238,9 @@ footer {
   margin: auto;
 }
 
-body > main {
-  max-width: var(--max-width);
-  margin: 1rem auto;
-  flex: 1;
-}
-
-main > form {
-  margin: 1rem auto;
-  border: solid 1px var(--border-color);
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  background-color: var(--form-bg-color);
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: none;
-}
-article img,
-section img {
-  max-width: 100%;
-}
-hr {
-  background-color: var(--input-border-color);
-  border: none;
-  height: 1px;
-  margin: 1rem 0;
-  width: 100%;
-}
 ol li,
 ul li {
   margin: 0 1rem;
-}
-p {
-  margin: 0.75rem 0;
-  padding: 0;
-}
-details {
-  margin: 1.3rem 0;
-}
-details summary {
-  font-weight: 700;
-  cursor: pointer;
-}
-form {
-  width: 400px;
-}
-form h1 {
-  padding: 5px 0;
-  font-size: 1.4rem;
-  font-weight: 400;
-  text-align: center;
-  color: var(--text-bright);
-}
-form i {
-  margin-left: -30px;
-  cursor: pointer;
-}
-form p {
-  margin-bottom: 0.5rem;
-}
-form > section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-form > footer {
-  text-align: center;
-  border-top: solid 1px var(--input-border-color);
-  padding: 0.5rem 0;
-  font-size: 0.8rem;
-}
-form > div {
-  margin-bottom: 0.75rem;
-}
-input + small,
-label + small,
-textarea + small {
-  color: var(--error);
-}
-label {
-  display: inline-block;
-  margin-bottom: 5px;
-  vertical-align: top;
-  width: 100%;
-}
-input,
-select,
-textarea {
-  background-color: var(--input-background-color);
-  color: var(--input-text-color);
-  border: 1px solid var(--input-border-color);
-  border-radius: var(--border-radius);
-  display: inline-block;
-  padding: 0.5rem 0.75rem;
-  width: 100%;
-  font-family: inherit;
-  font-size: 1rem;
-}
-input::placeholder {
-  color: var(--input-placeholder-color);
-}
-input:focus,
-select:focus,
-textarea:focus {
-  outline: 0;
-  box-shadow: var(--input-focus);
-}
-input[disabled],
-textarea[disabled] {
-  background-color: var(--input-disabled);
-  border: solid 1px var(--input-border-color);
-  box-shadow: none;
-  color: var(--input-text-disabled);
-  cursor: not-allowed;
-}
-input.error,
-select.error,
-textarea.error {
-  border-color: var(--error);
-}
-input.error:focus,
-select.error:focus,
-textarea.error:focus {
-  box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 25%);
-}
-input.success,
-select.success,
-textarea.success {
-  border-color: var(--success);
-}
-input.success:focus,
-textarea.success:focus {
-  box-shadow: 0 0 0 0.25rem rgb(25 135 84 / 25%);
 }
 
 .btn {
@@ -407,33 +267,6 @@ textarea.success:focus {
   cursor: pointer;
 }
 
-form > button {
-  display: block;
-  width: 100%;
-}
-form > div > div > label {
-  width: auto;
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  border-radius: var(--border-radius);
-}
-form > div > p > label {
-  display: block;
-  margin-left: auto;
-  margin-bottom: 0.75rem;
-}
-label + label {
-  margin-left: 1rem;
-}
-input[type="checkbox"],
-input[type="radio"] {
-  vertical-align: baseline;
-  width: auto;
-}
-[hidden] {
-  display: none;
-}
 .alert {
   position: relative;
   padding: 1rem 1rem;
@@ -462,4 +295,83 @@ input[type="radio"] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+main {
+  max-width: 100%;
+}
+
+form {
+  max-width: 80%;
+  margin: auto;
+}
+
+.form {
+  max-width: 100%;
+  /* background-color: #664d03; */
+  height: 100px;
+}
+
+.form:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.form__image {
+  float: left;
+  width: 33.33%;
+}
+
+.form__input {
+  float: left;
+  width: 66.66%;
+}
+
+.w-input {
+  width: 100%;
+}
+
+.w45-input {
+  width: 49%;
+}
+
+.g-col {
+  display: flex;
+  justify-content: space-between;
+}
+
+textarea {
+  overflow-y: scroll;
+  height: 100px;
+  resize: none; /* Remove this if you want the user to resize the textarea */
+}
+
+.border_style {
+  height: 40px;
+  font-size: 0.875rem;
+  outline: none;
+  padding: 10px;
+  border: 1px solid #cac4c4;
+  border-radius: 4px;
+}
+
+.border-textarea {
+  font-size: 0.875rem;
+  outline: none;
+  padding: 10px;
+  border: 1px solid #cac4c4;
+  border-radius: 4px;
+}
+
+.p-10 {
+  padding: 10px 0;
+}
+
+.fz-11 {
+  font-size: 11px;
+}
+
+.text-danger {
+  color: red;
 }
