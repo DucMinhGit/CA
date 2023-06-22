@@ -11,6 +11,16 @@
     display: block;
     margin-right: 25px;
   }
+
+  .site-footer-widgets {
+    max-width: 95%;
+    flex-direction: column;  
+  }
+
+  .site-text-info {
+    max-width: 84%;
+    margin: auto;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
