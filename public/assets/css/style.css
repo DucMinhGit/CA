@@ -137,12 +137,12 @@ body > header {
 .nav__mobile {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   bottom: 0;
   width: 320px;
   max-width: 100%;
   background-color: white;
-  transform: translateX(-100%);
+  transform: translateX(100%);
   opacity: 0;
   transition: transform linear 0.2s, opacity linear 0.2s;
 }
