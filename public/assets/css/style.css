@@ -52,6 +52,12 @@ body > header {
   height: 80px;
 }
 
+body > main {
+  max-width: var(--max-width);
+  margin: 1rem auto;
+  flex: 1;
+}
+
 .header-wrapper {
   max-width: 80%;
   margin: auto;
