@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
-    <link rel="stylesheet" href="./assets/css/responsive.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost/tb/ca/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost/tb/ca/assets/css/responsive.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title><?= $title ?? 'Home' ?></title>
 </head>
@@ -15,7 +15,7 @@
         <div class="header-wrapper">
             <div class="site-branding">
                 <a href="http://localhost/tb/ca">
-                    <img src="./image/f_logo.png" width="70%" height="70%" alt="Logo" class="logo">
+                    <img src="http://localhost/tb/ca/image/f_logo.png" width="70%" height="70%" alt="Logo" class="logo">
                 </a>
             </div>
             <nav class="site-navigation">
