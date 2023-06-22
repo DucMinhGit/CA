@@ -33,7 +33,7 @@ flash();
         <small><?= $errors['agree'] ?? '' ?></small>
     </div>
     <section>
-        <button type="submit">Login</button>
+        <button class="btn" type="submit">Login</button>
         <a href="register.php">Register</a>
     </section>
 </form>
