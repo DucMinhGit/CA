@@ -193,6 +193,13 @@ body > header {
   opacity: 1;
 }
 
+.nav__mobile-name {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 12px;
+  color: var(--primary);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
