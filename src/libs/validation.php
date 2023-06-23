@@ -10,6 +10,7 @@ const DEFAULT_VALIDATION_ERRORS = [
     'alphanumeric' => 'The %s should have only letters and numbers',
     'secure' => 'The %s must have between 8 and 64 characters and contain at least one number, one upper case letter, one lower case letter and one special character',
     'unique' => 'The %s already exists',
+    'numeric_config' => 'The %s is not type number',
 ];
 
 /**
@@ -239,4 +240,19 @@ function is_unique(array $data, string $field, string $table, string $column): b
     $stmt->execute();
 
     return $stmt->fetchColumn() === false;
+}
+
+/**
+ * Return true if it is number
+ * @param array $data
+ * @param string $field
+ * @return bool
+ */
+function is_numeric_config(array $data, string $field): bool
+{
+    if(!isset($data[$field])){
+        return true;
+    }
+
+    return is_numeric($data[$field]);
 }
