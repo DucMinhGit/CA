@@ -98,7 +98,7 @@ function is_min(array $data, string $field, int $min): bool
         return true;
     }
 
-    return mb_strlen($data[$field]) >= $min;
+    return (int)$data[$field] >= $min;
 }
 
 /**
@@ -114,7 +114,39 @@ function is_max(array $data, string $field, int $max): bool
         return true;
     }
 
+    return (int)$data[$field] <= $max;
+}
+
+/**
+ * Return true if a string has at least min length
+ * @param array $data
+ * @param string $field
+ * @param int $max
+ * @return bool
+ */
+function is_max_str_len(array $data, string $field, int $max): bool
+{
+    if (!isset($data[$field])) {
+        return true;
+    }
+
     return mb_strlen($data[$field]) <= $max;
+}
+
+/**
+ * Return true if a string has at least min length
+ * @param array $data
+ * @param string $field
+ * @param int $min
+ * @return bool
+ */
+function is_min_str_len(array $data, string $field, int $min): bool
+{
+    if (!isset($data[$field])) {
+        return true;
+    }
+
+    return mb_strlen($data[$field]) >= $min;
 }
 
 /**
