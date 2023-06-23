@@ -378,6 +378,6 @@ textarea {
   font-size: 11px;
 }
 
-.text-danger {
+.text-danger, .error {
   color: red;
 }
