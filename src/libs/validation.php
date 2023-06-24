@@ -129,7 +129,7 @@ function is_max(array $data, string $field, int $max): bool
  */
 function is_max_str_len(array $data, string $field, int $max): bool
 {
-    if (!isset($data[$field])) {
+    if (!isset($data[$field]) || $data[$field] === '') {
         return true;
     }
 
@@ -145,7 +145,7 @@ function is_max_str_len(array $data, string $field, int $max): bool
  */
 function is_min_str_len(array $data, string $field, int $min): bool
 {
-    if (!isset($data[$field])) {
+    if (!isset($data[$field]) || $data[$field] === '') {
         return true;
     }
 
