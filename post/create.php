@@ -5,8 +5,11 @@ require_once __DIR__ . '/../src/Controller/PostController.php';
 
 view('header', ['title' => 'Create Post']);
 flash();
+
 ?>
 <form action="" method="post" enctype="multipart/form-data">
+    <!-- CSRF TOKEN -->
+    <input id="token" type="hidden" name="_token" value="<?php echo $_SESSION['token'] ?? '' ?>">
     <div class="form">
         <div class="form__image">
             <input type="file" name="file[]" id="" multiple>
@@ -29,16 +32,29 @@ flash();
                     <small class="error"><?= $errors['company_name'] ?? '' ?></small>
                 </div>
                 <div class="p-10">
-                    <select name="province" class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
-                        <option value="07" selected>Chọn tỉnh thành</option>
+                    <select name="city" class="form-select form-select-sm mb-3 choose_location" id="city">
+                        <option value="">--- Choose a city ---</option>
+                        <?php foreach ($cities as $city_code => $name) : ?>
+                            <option value="<?= $city_code ?>" <?= isset($inputs['city']) && $inputs['city'] == $city_code ? 'selected' : '' ?>><?= $name ?></option>
+                        <?php endforeach ?>
                     </select>
 
-                    <select name="city" class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
-                        <option value="" selected>Chọn quận huyện</option>
+                    <select name="district" class="form-select form-select-sm mb-3 choose_location" id="district">
+                        <option value="">--- Choose a district ---</option>
+                        <?php if (isset($inputs['district'])) : ?>
+                            <?php foreach ($districts as $district_code => $name) : ?>
+                                <option value="<?= $district_code ?>" <?= $inputs['district'] == $district_code ? 'selected' : '' ?>><?= $name ?></option>
+                            <?php endforeach ?>
+                        <?php endif ?>
                     </select>
 
-                    <select name="ward" class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
-                        <option value="" selected>Chọn phường xã</option>
+                    <select name="ward" class="form-select form-select-sm" id="ward">
+                        <option value="">--- Choose a ward ---</option>
+                        <?php if (isset($inputs['ward'])) : ?>
+                            <?php foreach ($wards as $ward_code => $name) : ?>
+                                <option value="<?= $ward_code ?>" <?= $inputs['ward'] == $ward_code ? 'selected' : '' ?>><?= $name ?></option>
+                            <?php endforeach ?>
+                        <?php endif ?>
                     </select>
                     <input type="text" name="address_detail" value="">
                 </div>
@@ -140,4 +156,5 @@ flash();
         </div>
     </div>
 </form>
+<script src="http://localhost/tb/ca/assets/js/location.js"></script>
 <?php view('footer'); ?>

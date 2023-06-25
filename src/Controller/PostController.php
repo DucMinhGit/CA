@@ -2,6 +2,9 @@
 
 $inputs = [];
 $errors = [];
+$districts = [];
+$wards = [];
+
 $youares = require_once __DIR__ . "/../../config/youares.php";
 $careers = require_once __DIR__ . "/../../config/career.php";
 $typeOfWork = require_once __DIR__ . "/../../config/typeOfWork.php";
@@ -10,7 +13,7 @@ $genders = require_once __DIR__ . "/../../config/gender.php";
 $levelEducates = require_once __DIR__ . "/../../config/levelEducate.php";
 $experiences = require_once __DIR__ . "/../../config/experience.php";
 
-if(is_post_request()) 
+if (is_post_request()) 
 {
     $fields = [
         'youare' => 'string | required | numeric_config',
@@ -19,10 +22,10 @@ if(is_post_request())
         'min_salary' => 'int | numeric_config',
         'max_salary' => 'int | numeric_config',
         'negotiate' => 'int | numeric_config',
-        'province' => 'string | required | alphanumeric',
-        'city' => 'string | required | alphanumeric',
-        'ward' => 'string | required | alphanumeric',
-        'address_detail' => 'string | required | alphanumeric',
+        'city' => 'string | required',
+        'district' => 'string | required',
+        'ward' => 'string | required',
+        'address_detail' => 'string | required',
         'content' => 'string | required | min_str_len:20 | max_str_len: 1500',
         'payment' => 'int | required | numberic',
         'career' => 'int | required | numeric_config',
@@ -39,12 +42,30 @@ if(is_post_request())
 
     [$inputs, $errors] = filter($_POST, $fields);
 
-    if($errors)
-    {
-        redirect_with('create.php', ['inputs' => $inputs, 'errors' => $errors]);
-    }
+    if ($errors) {
+        if ($inputs['district'] !== '') {
+            $districts = get_district_by_city_code($inputs['city']);
+        }
 
-} 
-else if(is_get_request()) {
-    [$inputs, $errors] = session_flash('inputs', 'errors');
+        if ($inputs['ward'] !== '') {
+            $wards = get_ward_by_district_code($inputs['district']);
+        }
+
+        redirect_with(
+            'create.php',
+            [
+                'inputs' => $inputs,
+                'errors' => $errors,
+                'districts' => $districts,
+                'wards' => $wards
+            ]
+        );
+    }
+} else if (is_get_request()) {
+    [$inputs, $errors, $districts, $wards] = session_flash('inputs', 'errors', 'districts', 'wards');
+
+    // Create token CSRF
+    $_SESSION['token'] = create_token();
+
+    $cities = get_info_city();
 }

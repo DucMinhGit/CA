@@ -18,7 +18,6 @@
     </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="http://localhost/tb/ca/assets/js/script.js"></script>
 </body>
 
