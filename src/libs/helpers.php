@@ -104,3 +104,12 @@ function session_flash(...$keys): array
     }
     return $data;
 }
+
+/**
+ * Create new a token
+ * @return string
+ */
+function create_token(): string
+{
+    return bin2hex(random_bytes(35));
+}
