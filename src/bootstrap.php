@@ -10,6 +10,8 @@ require_once __DIR__ . '/libs/sanitization.php';
 require_once __DIR__ . '/libs/validation.php';
 require_once __DIR__ . '/libs/filter.php';
 require_once __DIR__ . '/libs/connection.php';
+require_once __DIR__ . '/libs/functionImages.php';
+require_once __DIR__ . '/libs/images.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/remember.php';
 require_once __DIR__ . '/Repositories/LocationRepository.php';

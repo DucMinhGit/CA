@@ -12,7 +12,10 @@ flash();
     <input id="token" type="hidden" name="_token" value="<?php echo $_SESSION['token'] ?? '' ?>">
     <div class="form">
         <div class="form__image">
-            <input type="file" name="file[]" id="" multiple>
+            <input type="file" name="files[]" id="" multiple> <br>
+            <?php if(isset($errors['files'])): ?>
+                <?php display_error_message_image($errors['files']); ?>
+            <?php endif ?>
         </div>
         <div class="form__input">
             <div class="form__input-employer">

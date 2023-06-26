@@ -113,3 +113,19 @@ function create_token(): string
 {
     return bin2hex(random_bytes(35));
 }
+
+/**
+ * Recursively trim strings in an array
+ * @param array $items
+ * @return void
+ */
+function display_error_message_image(array $errors_mesasages): void
+{
+    foreach($errors_mesasages as $key => $value) {
+        if(is_string($value)) {
+            echo '<small class="error">'.$value.'</small> <br>';
+        } else if(is_array($value)) {
+            display_error_message_image($value);
+        }
+    }
+}
