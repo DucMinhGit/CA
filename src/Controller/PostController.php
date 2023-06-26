@@ -43,12 +43,16 @@ if (is_post_request()) {
 
     [$inputs, $errors] = filter($_POST, $fields);
 
+    // Check the $_FILE variable is sent from request post or not, otherwise, it will give an error message
     if (!isset($_FILES['files'])) {
         $errors['files']['note _exist'] = MESSAGES['file_not_exist'];
     }
-
+    // assign to $files
     $files = $_FILES['files'];
 
+    // if the file is upload with an error, it will not be saved
+    // if the file variable is exists, but status upload image is an error, it will not be saved
+    // if the file is upload with no error and return a array empty, it will be saved
     if (validation_image($files) !== [] && validation_image($files) !== false) {
         $errors['files']['error'] = validation_image($files);
     } else if (validation_image($files) === []) {
