@@ -59,7 +59,8 @@ flash();
                             <?php endforeach ?>
                         <?php endif ?>
                     </select>
-                    <input type="text" name="address_detail" value="">
+                    <input type="text" name="address_detail" value="<?= $inputs['address_detail'] ?? ''?>">
+                    <small class="error"><?= $errors['address_detail'] ?? '' ?></small>
                 </div>
             </div>
             <div class="form__input-job-content">
@@ -69,7 +70,7 @@ flash();
                     <small class="error"><?= $errors['title'] ?? '' ?></small>
                 </div>
                 <div class="p-10">
-                    <input type="number" class="border_style w-input" name="hiring_quantity" value="<?php $inputs['hiring_quantity'] ?? '' ?>" placeholder="Number of recruitments">
+                    <input type="number" class="border_style w-input" name="hiring_quantity" value="<?= $inputs['hiring_quantity'] ?? '' ?>" placeholder="Number of recruitments">
                     <small class="error"><?= $errors['hiring_quantity'] ?? '' ?></small>
                 </div>
                 <div class="p-10">
