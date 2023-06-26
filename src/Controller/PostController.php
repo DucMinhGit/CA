@@ -4,6 +4,7 @@ $inputs = [];
 $errors = [];
 $districts = [];
 $wards = [];
+$pathImages = [];
 
 $youares = require_once __DIR__ . "/../../config/youares.php";
 $careers = require_once __DIR__ . "/../../config/career.php";
@@ -12,13 +13,13 @@ $payments = require_once __DIR__ . "/../../config/payment.php";
 $genders = require_once __DIR__ . "/../../config/gender.php";
 $levelEducates = require_once __DIR__ . "/../../config/levelEducate.php";
 $experiences = require_once __DIR__ . "/../../config/experience.php";
+$upload_dir = dirname(__DIR__, 2) . '/public/uploads';
 
-if (is_post_request()) 
-{
+if (is_post_request()) {
     $fields = [
-        'youare' => 'string | required | numeric_config',
+        'youare' => 'string | required',
         'title' => 'string | required | alphanumeric | min_str_len:2 | max_str_len:256',
-        'company_name' => 'string | required | alphanumeric | min_str_len:2 | max_str_len:256',
+        'company_name' => 'string | required | min_str_len:2 | max_str_len:256',
         'min_salary' => 'int | numeric_config',
         'max_salary' => 'int | numeric_config',
         'negotiate' => 'int | numeric_config',
@@ -29,7 +30,7 @@ if (is_post_request())
         'content' => 'string | required | min_str_len:20 | max_str_len: 1500',
         'payment' => 'int | required | numberic',
         'career' => 'int | required | numeric_config',
-        'gender' => 'string | required | numeric_config',
+        'gender' => 'string | required',
         'hiring_quantity' => 'int | required | numeric_config',
         'minimal_education' => 'int | required | numeric_config',
         'minimal_age' => 'int | required | min:18 | numeric_config',
@@ -42,6 +43,25 @@ if (is_post_request())
 
     [$inputs, $errors] = filter($_POST, $fields);
 
+    if (!isset($_FILES['files'])) {
+        $errors['files']['note _exist'] = MESSAGES['file_not_exist'];
+    }
+
+    $files = $_FILES['files'];
+
+    if (validation_image($files) !== [] && validation_image($files) !== false) {
+        $errors['files']['error'] = validation_image($files);
+    } else if (validation_image($files) === []) {
+        if (move_file_image($files, $upload_dir)) {
+            if (isset($_SESSION['pathImage'])) {
+                $pathImages = $_SESSION['pathImage'];
+                unset($_SESSION['pathImage']);
+            }
+        } else {
+            $errors['files']['file_type'] = MESSAGES['move_file'];
+        }
+    }
+
     if ($errors) {
         if ($inputs['district'] !== '') {
             $districts = get_district_by_city_code($inputs['city']);
@@ -49,6 +69,12 @@ if (is_post_request())
 
         if ($inputs['ward'] !== '') {
             $wards = get_ward_by_district_code($inputs['district']);
+        }
+
+        if ($pathImages !== []) {
+            foreach ($pathImages as $pathImage) {
+                unlink($pathImage);
+            }
         }
 
         redirect_with(
@@ -61,6 +87,8 @@ if (is_post_request())
             ]
         );
     }
+
+    redirect_to('create.php');
 } else if (is_get_request()) {
     [$inputs, $errors, $districts, $wards] = session_flash('inputs', 'errors', 'districts', 'wards');
 
