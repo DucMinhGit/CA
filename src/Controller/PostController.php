@@ -66,6 +66,16 @@ if (is_post_request()) {
         }
     }
 
+    // Check min_salary < max_salary
+    if(!check_max((int)$inputs['min_salary'], (int)$inputs['max_salary'])) {
+        $errors['min_salary'] = MESSAGES['err_salary'];
+    }
+
+    // Check minimal_age < max_salary
+    if(!check_max((int)$inputs['minimal_age'], (int)$inputs['maximum_age'])) {
+        $errors['minimal_age'] = MESSAGES['err_age'];
+    }
+
     if ($errors) {
         if ($inputs['district'] !== '') {
             $districts = get_district_by_city_code($inputs['city']);

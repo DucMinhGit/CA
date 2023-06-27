@@ -121,11 +121,22 @@ function create_token(): string
  */
 function display_error_message_image(array $errors_mesasages): void
 {
-    foreach($errors_mesasages as $key => $value) {
-        if(is_string($value)) {
-            echo '<small class="error">'.$value.'</small> <br>';
-        } else if(is_array($value)) {
+    foreach ($errors_mesasages as $key => $value) {
+        if (is_string($value)) {
+            echo '<small class="error">' . $value . '</small> <br>';
+        } else if (is_array($value)) {
             display_error_message_image($value);
         }
     }
+}
+
+/**
+ * Check number than more
+ * @param int $min
+ * @param int $max
+ * @return bool
+ */
+function check_max(int $min, int $max)
+{
+    return $max >= $min;
 }
