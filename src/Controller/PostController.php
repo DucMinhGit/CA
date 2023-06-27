@@ -51,9 +51,9 @@ if (is_post_request()) {
     $files = $_FILES['files'];
 
     // if the file is upload with an error, it will not be saved
-    // if the file variable is exists, but status upload image is an error, it will not be saved
+    // if the file variable is exists, but status upload image is an error, it will return false and not be saved
     // if the file is upload with no error and return a array empty, it will be saved
-    if (validation_image($files) !== [] && validation_image($files) !== false) {
+    if (validation_image($files) !== []) {
         $errors['files']['error'] = validation_image($files);
     } else if (validation_image($files) === []) {
         if (move_file_image($files, $upload_dir)) {
