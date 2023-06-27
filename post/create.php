@@ -101,9 +101,9 @@ flash();
                     <small class="error"><?= $errors['payment'] ?? '' ?></small>
                 </div>
                 <div class="g-col p-10">
-                    <input type="number" name="min_salary" value="0" placeholder="Min salary" class="border_style w45-input">
+                    <input type="number" name="min_salary" value="<?= $inputs['min_salary'] ?? 0 ?>" placeholder="Min salary" class="border_style w45-input">
                     <small class="error"><?= $errors['min_salary'] ?? '' ?></small>
-                    <input type="number" name="max_salary" value="0" placeholder="Max salary" class="border_style w45-input">
+                    <input type="number" name="max_salary" value="<?= $inputs['max_salary'] ?? 0 ?>" placeholder="Max salary" class="border_style w45-input">
                     <small class="error"><?= $errors['max_salary'] ?? '' ?></small>
                 </div>
                 <div class="p-10">
