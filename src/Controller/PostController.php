@@ -1,5 +1,7 @@
 <?php
 
+require_login();
+
 $inputs = [];
 $errors = [];
 $districts = [];
