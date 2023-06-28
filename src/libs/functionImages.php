@@ -19,7 +19,8 @@ const MESSAGES = [
     'mime_type' => "The image is allowed to upload",
     'move_file' => "The image was failed to move.",
     'err_salary' => 'The minimum salary must be lower than the maximum salary',
-    'err_age' => 'The minimum age must be lower than the maximum age'
+    'err_age' => 'The minimum age must be lower than the maximum age',
+    'create_error' => 'Created post failed, Please come back in a few minutes, or contact the administrator for assistance!'
 ];
 
 /**

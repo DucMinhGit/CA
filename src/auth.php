@@ -111,7 +111,7 @@ function log_user_in(array $user): bool
 function require_login(): void
 {
     if (!is_user_logged_in()) {
-        redirect_to('login.php');
+        redirect_to('http://localhost/tb/ca/login.php');
     }
 }
 

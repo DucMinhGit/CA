@@ -3,8 +3,8 @@
 const DEFAULT_VALIDATION_ERRORS = [
     'required' => 'The %s is required',
     'email' => 'The %s is not a valid email address',
-    'min' => 'The %s less than or equal %s',
-    'max' => 'The %s more than or equal %s',
+    'min' => 'The %s more than or equal %s',
+    'max' => 'The %s less than or equal %s',
     'between' => 'The %s must have between %d and %d characters',
     'same' => 'The %s must match with %s',
     'alphanumeric' => 'The %s should have only letters and numbers',
