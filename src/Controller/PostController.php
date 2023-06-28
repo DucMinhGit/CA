@@ -44,6 +44,11 @@ if (is_post_request()) {
         'certificate_skill' => 'string | max_str_len:300',
     ];
 
+    // Check token form
+    if($_POST['_token'] !== $_SESSION['token']) {
+        redirect_with_message('create.php', MESSAGES['warning_form'], FLASH_WARNING);
+    }
+
     [$inputs, $errors] = filter($_POST, $fields);
 
     // Check the $_FILE variable is sent from request post or not, otherwise, it will give an error message
