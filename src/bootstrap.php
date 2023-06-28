@@ -15,3 +15,5 @@ require_once __DIR__ . '/libs/images.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/remember.php';
 require_once __DIR__ . '/Repositories/LocationRepository.php';
+require_once __DIR__ . '/Repositories/PostRepository.php';
+require_once __DIR__ . '/Repositories/ImageRepository.php';

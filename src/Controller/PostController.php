@@ -8,6 +8,7 @@ $districts = [];
 $wards = [];
 $pathImages = [];
 
+$pdo = require_once __DIR__ . "/../../config/connect.php";
 $youares = require_once __DIR__ . "/../../config/youares.php";
 $careers = require_once __DIR__ . "/../../config/career.php";
 $typeOfWork = require_once __DIR__ . "/../../config/typeOfWork.php";
@@ -20,7 +21,7 @@ $upload_dir = dirname(__DIR__, 2) . '/public/uploads';
 if (is_post_request()) {
     $fields = [
         'youare' => 'string | required',
-        'title' => 'string | required | alphanumeric | min_str_len:2 | max_str_len:256',
+        'title' => 'string | required | min_str_len:2 | max_str_len:256',
         'company_name' => 'string | required | min_str_len:2 | max_str_len:256',
         'min_salary' => 'int | numeric_config',
         'max_salary' => 'int | numeric_config',
@@ -55,7 +56,7 @@ if (is_post_request()) {
     // if the file is upload with an error, it will not be saved
     // if the file variable is exists, but status upload image is an error, it will return false and not be saved
     // if the file is upload with no error and return a array empty, it will be saved
-    if (validation_image($files) !== []) {
+    if (validation_image($files) !== [] && validation_image($files) !== false) {
         $errors['files']['error'] = validation_image($files);
     } else if (validation_image($files) === []) {
         if (move_file_image($files, $upload_dir)) {
@@ -69,16 +70,18 @@ if (is_post_request()) {
     }
 
     // Check min_salary < max_salary
-    if(!check_max((int)$inputs['min_salary'], (int)$inputs['max_salary'])) {
+    if (!check_max((int)$inputs['min_salary'], (int)$inputs['max_salary'])) {
         $errors['min_salary'] = MESSAGES['err_salary'];
     }
 
     // Check minimal_age < max_salary
-    if(!check_max((int)$inputs['minimal_age'], (int)$inputs['maximum_age'])) {
+    if (!check_max((int)$inputs['minimal_age'], (int)$inputs['maximum_age'])) {
         $errors['minimal_age'] = MESSAGES['err_age'];
     }
 
     if ($errors) {
+        var_dump($errors);
+        die;
         if ($inputs['district'] !== '') {
             $districts = get_district_by_city_code($inputs['city']);
         }
@@ -104,7 +107,62 @@ if (is_post_request()) {
         );
     }
 
-    redirect_to('create.php');
+    // Check value to get value
+    if ($inputs['min_salary'] === '0' && $inputs['max_salary'] === '0') {
+        $negotiate = 1;
+    }
+
+    if (empty($inputs['benefit'])) {
+        $inputs['benefit'] === NULL;
+    }
+
+    if (empty($inputs['certificate_skill'])) {
+        $inputs['certificate_skill'] === NULL;
+    }
+
+    $address =  $inputs['address_detail'] . ', ' . $inputs['ward'] . ', ' . $inputs['district']  . ', ' . $inputs['city'];
+
+    try {
+        $pdo->beginTransaction();
+
+        $post_id = insert_post(
+            $pdo,
+            $inputs['company_name'],
+            $inputs['title'],
+            $address,
+            $inputs['content'],
+            $inputs['payment'],
+            $inputs['career'],
+            $inputs['gender'],
+            $inputs['hiring_quantity'],
+            $inputs['minimal_education'],
+            $inputs['minimal_age'],
+            $inputs['maximum_age'],
+            $inputs['type_of_work'],
+            user_id(),
+            $inputs['experience'],
+            $inputs['benefit'],
+            $inputs['certificate_skill'],
+            $inputs['min_salary'],
+            $inputs['max_salary'],
+            $negotiate
+        );
+
+        foreach ($pathImages as $image) {
+            insert_image($pdo, $image, $post_id);
+        }
+
+        $pdo->commit();
+        
+        redirect_with_message('create.php', 'Created post successfully');
+    } catch (\Exception $e) {
+        // Rollback the transaction
+        $pdo->rollBack();
+
+        // Show the error message
+        redirect_with_message('create.php', MESSAGES['create_error'], FLASH_ERROR);
+    }
+
 } else if (is_get_request()) {
     [$inputs, $errors, $districts, $wards] = session_flash('inputs', 'errors', 'districts', 'wards');
 
