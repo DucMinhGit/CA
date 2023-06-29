@@ -84,9 +84,8 @@ if (is_post_request()) {
         $errors['minimal_age'] = MESSAGES['err_age'];
     }
 
-    if ($errors) {
-        var_dump($errors);
-        die;
+    if ($errors) 
+    {
         if ($inputs['district'] !== '') {
             $districts = get_district_by_city_code($inputs['city']);
         }
