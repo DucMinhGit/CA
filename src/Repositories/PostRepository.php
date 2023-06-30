@@ -55,3 +55,23 @@ function insert_post(
 
     return $pdo->lastInsertId();
 }
+
+/**
+ * Get title post by id
+ * @param object PDO
+ * @param int $post_id
+ * @return string
+ * 
+ */
+function get_title_post_by_id(\PDO $pdo, string $post_id) 
+{
+    $sql = "SELECT title
+            FROM posts
+            WHERE id=:id";
+    
+    $statement = $pdo->prepare($sql);
+    $statement->bindValue(':id', $post_id);
+    $statement->execute();
+
+    return $statement->fetchColumn();
+}
