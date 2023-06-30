@@ -387,12 +387,20 @@ textarea {
 Content post
 
 */
-.col-lg-8 {
+
+.row {
+  width: 100%;
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.col-md-8 {
   width: 66%;
 }
 
-.col-lg-4 {
+.col-md-4 {
   width: 33%;
+  margin-top: 25px;
 }
 
 /**
@@ -402,6 +410,8 @@ Style slider
   max-width: 1000px;
   margin: 25px auto;
   position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 15px;
 }
 
 .slider-next,
@@ -415,8 +425,8 @@ Style slider
   display: flex !important;
   justify-content: center;
   align-items: center;
-  color: #999;
-  background-color: white;
+  color: white;
+  background-color: #999;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
   font-size: 20px;
@@ -486,4 +496,161 @@ Style slider
   height: 100%;
   object-fit: contain;
   border-radius: 10px;
+}
+
+/*
+Style content post
+*/
+.salary {
+  color: #c90927;
+  font-weight: 700;
+  display: flex;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.salary_horizontal,
+.salary_unit {
+  margin: 0 5px;
+}
+
+.btn_save {
+  color: #c90927;
+  border: 1px solid #c90927;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.btn_save i {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.red_block_line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-icon {
+  width: 30px;
+  text-align: center;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user-img > img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  padding-top: 10px;
+  text-align: justify;
+  margin-bottom: 10px;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+
+.phone a {
+  color: #33659c;
+}
+
+.required {
+  display: flex;
+}
+
+.required_left,
+.required_right {
+  width: 50%;
+}
+
+.m-20 {
+  margin: 20px 0;
+}
+
+.info_detail {
+  display: flex;
+}
+
+.phone,
+.recruitment,
+.info-shop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-shop {
+  align-items: center;
+}
+
+.youare {
+  text-align: center;
+}
+
+.btn-view {
+  font-size: 12px;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.logo img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.wrap-right {
+  padding: 10px;
+}
+
+.name_company {
+  padding: 10px;
+}
+
+.pb-10 {
+  padding-bottom: 10px;
+}
+
+.recruitment {
+  background-color: var(--primary);
+  color: white;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.recruitment_icon {
+  font-size: 25px;
+}
+
+.phone {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 10px;
+  color: var(--primary);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.phone_icon {
+  padding: 0 5px;
 }

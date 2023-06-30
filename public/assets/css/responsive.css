@@ -14,12 +14,20 @@
 
   .site-footer-widgets {
     max-width: 95%;
-    flex-direction: column;  
+    flex-direction: column;
   }
 
   .site-text-info {
     max-width: 82%;
     margin: auto;
+  }
+
+  .col-md-4 {
+    display: none;
+  }
+
+  .col-md-8 {
+    width: 100%;
   }
 }
 
