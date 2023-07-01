@@ -1,17 +1,10 @@
 <?php
 
 require_once __DIR__ . '/../src/bootstrap.php';
+
 $pdo = require_once __DIR__ . '/../config/connect.php';
 
-if (!isset($_GET['id'])) {
-    redirect_to('404.php');
-}
-
-$fields = ['id' => 'int | config_numeric'];
-
-[$inputs, $errors] = filter($_GET, $fields);
-
-$title = get_title_post_by_id($pdo, $inputs['id']);
+require_once __DIR__ . '/../src/Controller/detail.php';
 
 view('header', ['title' => $title]);
 ?>
@@ -21,13 +14,22 @@ view('header', ['title' => $title]);
         <div class="slider">
             <i class="fa fa-angle-left slider-prev"></i>
             <ul class="slider-dots">
-                <!-- <li class="slider-dot-item active" data-index="0"></li> -->
+                <?php if($images !== []) : ?>
+                    <li class="slider-dot-item active" data-index="0"></li>
+                    <?php for($i = 1; $i < count($images); $i++): ?>
+                        <li class="slider-dot-item" data-index="<?=$i?>"></li>
+                    <?php endfor ?>
+                <?php endif ?>
             </ul>
             <div class="slider-wrapper">
                 <div class="slider-main">
-                    <div class="slider-item">
-                        <img src="" alt="" />
-                    </div>
+                <?php if($images !== []) : ?>
+                    <?php foreach($images as $image): ?>
+                        <div class="slider-item">
+                            <img src="<?= $image['path_image'] ?>" alt="" />
+                        </div>
+                    <?php endforeach ?>
+                <?php endif; ?>
                 </div>
             </div>
             <i class="fa fa-angle-right slider-next"></i>
@@ -37,10 +39,17 @@ view('header', ['title' => $title]);
         </div>
         <div class="red_block_line">
             <div class="salary">
-                <div class="salary_min"> 12.000.000 </div>
-                <div class="salary_horizontal"> - </div>
-                <div class="salary_max">15.000.000 </div>
-                <div class="salary_unit"> đ/tháng</div>
+                <?php if($post['negotiate'] == 1): ?>
+                    <div>Negotiate</div>
+                <?php elseif ($post['min_salary'] != 0 && $post['max_salary'] != 0): ?>
+                    <div class="salary_min"> <?= number_format($post['min_salary']) ?> </div>
+                    <div class="salary_horizontal"> - </div>
+                    <div class="salary_max"><?= number_format($post['max_salary']) ?> </div>
+                    <div class="salary_unit"> đ/tháng</div>
+                <?php else: ?>
+                    <div class="salary_max"><?= number_format($post['max_salary']) ?> </div>
+                    <div class="salary_unit"> đ/tháng</div>
+                <?php endif ?>
             </div>
             <div class="save_post">
                 <span class="btn_save">Save
@@ -54,35 +63,42 @@ view('header', ['title' => $title]);
             </div>
             <div class="user_info">
                 <div>
-                    <i class="fa-solid fa-briefcase info-icon"></i> <span>Duc Minh Company</span>
+                    <i class="fa-solid fa-briefcase info-icon"></i> <span><?= $post['company_name'] ?></span>
                 </div>
                 <div>
-                    <i class="fa-solid fa-location-dot info-icon p-10"></i> <span>address</span>
+                    <i class="fa-solid fa-location-dot info-icon p-10"></i> <span><?= $address ?></span>
                 </div>
             </div>
         </div>
         <div class="content">
-            <!--content -->
+            <?= $post['content'] ?>
         </div>
         <div class="required">
             <div class="required_left">
-                <p class="m-20"><i class="fa-solid fa-money-check-dollar info-icon"></i> Hình thức trả lương: Theo tháng</p>
-                <p class="m-20"><i class="fa-solid fa-briefcase info-icon info-icon"></i>Ngành nghề: Bán hàng</p>
-                <p class="m-20"><i class="fa-solid fa-signature info-icon"></i>Tên công ty: Duc Minh Company</p>
-                <p class="m-20"><i class="fa-solid fa-graduation-cap info-icon"></i>Học vấn tối thiểu: Cấp 3</p>
-                <p class="m-20"><i class="fa-solid fa-chevron-right info-icon"></i>Tuổi tối đa: 26</p>
+                <p class="m-20"><i class="fa-solid fa-money-check-dollar info-icon"></i> Payment: <?=$payments[$post['payment']]?></p>
+                <p class="m-20"><i class="fa-solid fa-briefcase info-icon info-icon"></i>Carrer: <?=$careers[$post['career']] ?></p>
+                <p class="m-20"><i class="fa-solid fa-signature info-icon"></i>Comapny name: <?= $post['company_name'] ?></p>
+                <p class="m-20"><i class="fa-solid fa-graduation-cap info-icon"></i>Minimal educate: <?=$levelEducates[$post['minimal_education']]?></p>
+                <p class="m-20"><i class="fa-solid fa-angle-left info-icon"></i>Minimal age: <?=$post['minimal_age']?></p>
+                <p class="m-20"><i class="fa-solid fa-chevron-right info-icon"></i>Maximum age: <?=$post['maximum_age']?></p>
             </div>
             <div class="required_right">
-                <p class="m-20"><i class="fa-sharp fa-solid fa-clock info-icon"></i>Loại công việc: Toàn thời gian</p>
-                <p class="m-20"><i class="fa-solid fa-venus-mars info-icon"></i>Giới tính: Không yêu cầu</p>
-                <p class="m-20"><i class="fa-solid fa-people-group info-icon"></i>Số lượng tuyển dụng: 300</p>
-                <p class="m-20"><i class="fa-solid fa-angle-left info-icon"></i>Tuổi tối thiểu: 18</p>
+                <p class="m-20"><i class="fa-sharp fa-solid fa-clock info-icon"></i>Type of work: <?=$typeOfWork[$post['type_of_work']]?></p>
+                <p class="m-20"><i class="fa-solid fa-venus-mars info-icon"></i>Gender: <?=$genders[$post['gender']] ?></p>
+                <p class="m-20"><i class="fa-solid fa-people-group info-icon"></i>Hiring quantity: <?=$post['hiring_quantity']?></p>
+                <?php if(!is_null($post['benefit'])): ?>
+                    <p class="m-20"><i class="fa-regular fa-star info-icon"></i>Benefit: <?=$post['benefit']?></p>
+                <?php endif ?>
+                <?php if(!is_null($post['certificate_skill'])): ?>
+                    <p class="m-20"><i class="fa-solid fa-certificate info-icon"></i>Certificate/Skill: <?=$post['certificate_skill']?></p>
+                <?php endif ?>
+
             </div>
         </div>
         <div class="place">
             <p><b>Workplace</b></p>
             <div>
-                <i class="fa-solid fa-location-dot info-icon m-20"></i> <span>Nơi làm việc: address</span>
+                <i class="fa-solid fa-location-dot info-icon m-20"></i> <span><?= $address ?></span>
             </div>
         </div>
     </div>
@@ -94,7 +110,7 @@ view('header', ['title' => $title]);
                         <img src="../public/image/worker.png" alt="">
                     </div>
                     <div class="name_company">
-                        <b>Duc Minh Company</b>
+                        <b><?=$post['company_name']?></b>
                     </div>
                 </div>
                 <div>
