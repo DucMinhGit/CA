@@ -44,6 +44,11 @@ if (is_post_request()) {
         'certificate_skill' => 'string | max_str_len:300',
     ];
 
+    // Check token form
+    if($_POST['_token'] !== $_SESSION['token']) {
+        redirect_with_message('create.php', MESSAGES['warning_form'], FLASH_WARNING);
+    }
+
     [$inputs, $errors] = filter($_POST, $fields);
 
     // Check the $_FILE variable is sent from request post or not, otherwise, it will give an error message
@@ -79,9 +84,8 @@ if (is_post_request()) {
         $errors['minimal_age'] = MESSAGES['err_age'];
     }
 
-    if ($errors) {
-        var_dump($errors);
-        die;
+    if ($errors) 
+    {
         if ($inputs['district'] !== '') {
             $districts = get_district_by_city_code($inputs['city']);
         }
@@ -108,16 +112,17 @@ if (is_post_request()) {
     }
 
     // Check value to get value
+    $negotiate = 0;
     if ($inputs['min_salary'] === '0' && $inputs['max_salary'] === '0') {
         $negotiate = 1;
     }
 
     if (empty($inputs['benefit'])) {
-        $inputs['benefit'] === NULL;
+        $inputs['benefit'] = NULL;
     }
 
     if (empty($inputs['certificate_skill'])) {
-        $inputs['certificate_skill'] === NULL;
+        $inputs['certificate_skill'] = NULL;
     }
 
     $address =  $inputs['address_detail'] . ', ' . $inputs['ward'] . ', ' . $inputs['district']  . ', ' . $inputs['city'];
