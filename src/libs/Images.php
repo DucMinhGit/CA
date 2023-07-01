@@ -86,7 +86,7 @@ function move_file_image(array $files, string $upload_dir = __DIR__): bool
         $success = move_uploaded_file($tmp, $filepath);
 
         if ($success) {
-            $_SESSION['pathImage'][] = '/uploads/' . $filepath;
+            $_SESSION['pathImage'][] = '/uploads/' . $upload_file;
         } else {
             return false;
         }
