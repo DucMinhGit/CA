@@ -26,7 +26,7 @@ view('header', ['title' => $title]);
                 <?php if($images !== []) : ?>
                     <?php foreach($images as $image): ?>
                         <div class="slider-item">
-                            <img src="<?= $image['path_image'] ?>" alt="" />
+                            <img src="<?='http://localhost/tb/ca'. $image['path_image'] ?>" alt="" />
                         </div>
                     <?php endforeach ?>
                 <?php endif; ?>

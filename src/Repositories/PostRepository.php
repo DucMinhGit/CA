@@ -6,6 +6,7 @@
  */
 function insert_post(
     \PDO $pdo,
+    string $youare,
     string $company_name,
     string $title,
     string $address,
@@ -20,25 +21,25 @@ function insert_post(
     int $type_of_work,
     int $user_id,
     int $experience,
-    string $benefit,
-    string $certificate_skill = NULL,
+    ?string $benefit,
+    ?string $certificate_skill,
     int $min_salary = 0,
     int $max_salary = 0,
     int $negotiate = 0,
 ) {
-    $sql = "INSERT INTO posts(company_name, title, address, content, 
+    $sql = "INSERT INTO posts(youare, company_name, title, address, content, 
                             payment, career, gender, hiring_quantity,
                             minimal_education, minimal_age, maximum_age, 
                             type_of_work, user_id, experience, benefit, certificate_skill, 
                             min_salary, max_salary, negotiate)
-            VALUES (:company_name, :title, :address, :content, 
+            VALUES (:youare, :company_name, :title, :address, :content, 
                     :payment, :career, :gender, :hiring_quantity,
                     :minimal_education, :minimal_age, :maximum_age, 
                     :type_of_work, :user_id, :experience, :benefit, :certificate_skill, 
                     :min_salary, :max_salary, :negotiate)";
 
     $fields = [
-        'company_name', 'title', 'address', 'content',
+        'youare', 'company_name', 'title', 'address', 'content',
         'payment', 'career', 'gender', 'hiring_quantity',
         'minimal_education', 'minimal_age', 'maximum_age',
         'type_of_work', 'user_id', 'experience', 'benefit', 'certificate_skill',
