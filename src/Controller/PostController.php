@@ -132,6 +132,7 @@ if (is_post_request()) {
 
         $post_id = insert_post(
             $pdo,
+            $inputs['youare'],
             $inputs['company_name'],
             $inputs['title'],
             $address,
