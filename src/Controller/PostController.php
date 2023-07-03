@@ -112,16 +112,17 @@ if (is_post_request()) {
     }
 
     // Check value to get value
+    $negotiate = 0;
     if ($inputs['min_salary'] === '0' && $inputs['max_salary'] === '0') {
         $negotiate = 1;
     }
 
     if (empty($inputs['benefit'])) {
-        $inputs['benefit'] === NULL;
+        $inputs['benefit'] = NULL;
     }
 
     if (empty($inputs['certificate_skill'])) {
-        $inputs['certificate_skill'] === NULL;
+        $inputs['certificate_skill'] = NULL;
     }
 
     $address =  $inputs['address_detail'] . ', ' . $inputs['ward'] . ', ' . $inputs['district']  . ', ' . $inputs['city'];
@@ -131,6 +132,7 @@ if (is_post_request()) {
 
         $post_id = insert_post(
             $pdo,
+            $inputs['youare'],
             $inputs['company_name'],
             $inputs['title'],
             $address,
